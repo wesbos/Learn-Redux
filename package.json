@@ -1,0 +1,23 @@
+{
+  "name": "simple-redux",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "bundle": "watchify main.js -v -t [ babelify --presets [ es2015 react ] ] --outfile bundle.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-preset-es2015": "^6.1.2",
+    "babel-preset-react": "^6.1.2",
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2",
+    "react-redux": "^4.0.0",
+    "redux": "^3.0.4",
+    "redux-thunk": "^1.0.0"
+  },
+  "devDependencies": {
+    "babelify": "^7.2.0"
+  }
+}
