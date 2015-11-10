@@ -2,7 +2,6 @@ import React from 'react';
 import { render } from 'react-dom'
 import { createStore, combineReducers, applyMiddleware, bindActionCreators } from 'redux'
 import { connect, Provider } from 'react-redux';
-import thunk from 'redux-thunk'
 
 /*
   Actions
@@ -25,6 +24,7 @@ function decrement() {
 
 /*
   Reducers
+  take in a copy of state, modify it, and return the new state
 */
 
 function counter(state = 0, action) {
@@ -38,30 +38,20 @@ function counter(state = 0, action) {
   }
 }
 
-// Create a Root reducer
+// Combine all our reducers into a single file
 const rootReducer = combineReducers({
   counter
 });
 
 /*
-  Stores
+  Store
 */
 
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
-
-function configureStore(initialState) {
-  const store = createStoreWithMiddleware(rootReducer, initialState)
-  return store
-}
-
-// create the store
-const store = configureStore()
-
+const store = createStore(rootReducer);
 
 /*
   Components
 */
-
 
 var Counter = React.createClass({
   displayName : 'mycounter',
