@@ -4,10 +4,13 @@ import { createStore, combineReducers, applyMiddleware, bindActionCreators } fro
 import { connect, Provider } from 'react-redux';
 
 /*
-  Actions
+  Action Creators
   
   These fire events which the reducer will handle
   We will later call these functions from inside our component 
+
+  Later these functions get bound to 'dispatch' fires the actual event
+  Right now they just return an object
 
   It's a code convention to use all capitals and snake case for the event names
   We use const to store the name of the event so it is immutable
@@ -16,28 +19,44 @@ import { connect, Provider } from 'react-redux';
 
 const INCREMENT_COUNTER = 'INCREMENT_COUNTER'
 const DECREMENT_COUNTER = 'DECREMENT_COUNTER'
+const ADD_HEART = 'ADD_HEART'
 
 function increment() {
-  console.log('sending an increment action');
+  console.log('action: increment');
   return {
     type: INCREMENT_COUNTER
   }
 }
 
 function decrement() {
-  console.log('sending an decrement action');
+  console.log('action: decrement');
   return {
     type: DECREMENT_COUNTER
   }
 }
 
+function heart(dogNo) {
+  console.log("action: heart");
+  return {
+    type : ADD_HEART,
+    dogNo : dogNo
+  }
+}
+
+var actionCreators = {increment, decrement, heart};
+
 /*
   Reducers
+  reducers match up the fired action with a function that should be called.
+  It will take in a copy of state, modify it, and return the new state
+  When state gets large, it makes sense to have multiple reducers that only deal with a piece of the state
+  
+  The name of the reducer must line up with the name in state (is that true?)
 
-  take in a copy of state, modify it, and return the new state
 */
 
 function counter(state = 0, action) {
+  // console.log("Counter Reducer Called");
   switch (action.type) {
     case INCREMENT_COUNTER:
       return state + 1
@@ -48,9 +67,21 @@ function counter(state = 0, action) {
   }
 }
 
+function dogs(state = [], action) {
+  console.log("Dogs Reducer Called");
+  switch (action.type) {
+    case 'ADD_HEART':
+      var newState = state.slice(); // make a copy because we shouldn't mutate the state directly
+      newState[action.dogNo].hearts++;
+      return newState;
+    default:
+      return state;
+  }
+}
+
 // Combine all our reducers into a single file
 const rootReducer = combineReducers({
-  counter
+  counter, dogs
 });
 
 /*
@@ -61,7 +92,12 @@ const rootReducer = combineReducers({
   2. An optional starting state - here I'm setting the counter to 100 on load
 */
 
-const store = createStore(rootReducer, { counter : 100 });
+let defaultState = {
+  counter : 100,
+  dogs : [{name : 'snickers', hearts : 0}, {name : 'Hugo', hearts : 0}, {name :'Prudence', hearts : 0}]
+}
+
+const store = createStore(rootReducer, defaultState);
 
 /*
   Components
@@ -70,22 +106,42 @@ const store = createStore(rootReducer, { counter : 100 });
 */
 
 var Counter = React.createClass({
-  displayName : 'mycounter',
+  displayName : 'Counter',
   render() {
     // This line uses ES6 destructuring to make shorter variables. Better than using this.props.increment etc...
 
-    const { increment, decrement, counter } = this.props
+    const { increment, decrement, heart, counter, dogs } = this.props
+    console.log(dogs);
 
     // Then we go ahead and return some JSX
     return (
-      <p>
-        Clicked: {counter} times
-        <button onClick={increment}>+</button>
-        <button onClick={decrement}>-</button>
-      </p>
+      <div>
+        <p>
+          Clicked: {counter} times
+          <button onClick={increment}>+</button>
+          <button onClick={decrement}>-</button>
+          <button onClick={heart.bind(null,1)}>Add a heart to hugo</button>
+        </p>
+        {dogs.map((dog,i) => <Dog heart={heart} key={i} i={i} dog={dog} />)}
+      </div>
     )
   }
 });
+
+
+var Dog = React.createClass({
+  displayName : 'Dog',
+  render() {
+    let dog = this.props.dog;
+    return (
+      <div>
+         <h2>{dog.name}</h2>
+        <button onClick={this.props.heart.bind(null,this.props.i)}>{dog.hearts}</button>
+      </div>
+    );
+  }
+});
+
 
 /*
   Mapping
@@ -102,14 +158,18 @@ var Counter = React.createClass({
 function mapStateToProps(state) {
   // Here we make state.counter available via `this.props.counter`
   return {
-    counter: state.counter
+    counter: state.counter,
+    dogs : state.dogs
   }
 }
 
+
+/* This will make the bind our actions to dispatch (make the fire-able) and */
 function mapDispatchToProps(dispatch) {
   // Here we are providing and object of all the actions that need to be made available via props
-  // We have two: increment, and decrement
-  return bindActionCreators({increment, decrement }, dispatch)
+  // We have three: increment, and decrement and heart
+  return bindActionCreators(actionCreators, dispatch)
+  /* Note: bindActionCreators will alos make these actions available to all children */
 }
 
 // We create an <App/> component which is just our <Counter/> component with it's props
@@ -119,9 +179,7 @@ var App = connect(mapStateToProps, mapDispatchToProps)(Counter)
 
 /*
   Rendering
-  
   This is where we hook up the Store with our actual component 
-
 */
 render(
   <Provider store={store}>
