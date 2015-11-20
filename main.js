@@ -1,6 +1,6 @@
 import React from 'react';
-import { render } from 'react-dom'
-import { createStore, combineReducers, applyMiddleware, bindActionCreators } from 'redux'
+import { render } from 'react-dom';
+import { createStore, combineReducers, bindActionCreators } from 'redux';
 import { connect, Provider } from 'react-redux';
 
 /*
@@ -17,33 +17,39 @@ import { connect, Provider } from 'react-redux';
 
 */
 
-const INCREMENT_COUNTER = 'INCREMENT_COUNTER'
-const DECREMENT_COUNTER = 'DECREMENT_COUNTER'
-const ADD_HEART = 'ADD_HEART'
+const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
+const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
+const ADD_HEART = 'ADD_HEART';
+const ADD_ITEM = 'ADD_ITEM';
+const REMOVE_ITEM = 'REMOVE_ITEM';
 
 function increment() {
-  console.log('action: increment');
   return {
     type: INCREMENT_COUNTER
-  }
+  };
 }
 
 function decrement() {
-  console.log('action: decrement');
   return {
     type: DECREMENT_COUNTER
-  }
+  };
 }
 
 function heart(dogNo) {
-  console.log("action: heart");
   return {
     type : ADD_HEART,
     dogNo : dogNo
-  }
+  };
 }
 
-var actionCreators = {increment, decrement, heart};
+function addItem(text) {
+  return {
+    type : ADD_ITEM,
+    text
+  };
+}
+
+var actionCreators = {increment, decrement, heart, addItem};
 
 /*
   Reducers
@@ -51,26 +57,24 @@ var actionCreators = {increment, decrement, heart};
   It will take in a copy of state, modify it, and return the new state
   When state gets large, it makes sense to have multiple reducers that only deal with a piece of the state
   
-  The name of the reducer must line up with the name in state (is that true?)
+  The name of the reducer must line up with the name in state
 
 */
 
 function counter(state = 0, action) {
-  // console.log("Counter Reducer Called");
   switch (action.type) {
-    case INCREMENT_COUNTER:
-      return state + 1
-    case DECREMENT_COUNTER:
-      return state - 1
-    default:
-      return state
+  case INCREMENT_COUNTER:
+    return state + 1;
+  case DECREMENT_COUNTER:
+    return state - 1;
+  default:
+    return state;
   }
 }
 
 function dogs(state = [], action) {
-  console.log("Dogs Reducer Called");
   switch (action.type) {
-    case 'ADD_HEART':
+    case ADD_HEART:
       var newState = state.slice(); // make a copy because we shouldn't mutate the state directly
       newState[action.dogNo].hearts++;
       return newState;
@@ -79,9 +83,22 @@ function dogs(state = [], action) {
   }
 }
 
+function items(state = [], action) {
+  switch (action.type) {
+    case ADD_ITEM :
+      var newState = state.slice();
+      newState.push(action.text);
+      return newState;  
+    case REMOVE_ITEM :
+      return state;
+    default:
+      return state;
+  }
+}
+
 // Combine all our reducers into a single file
 const rootReducer = combineReducers({
-  counter, dogs
+  counter, dogs, items
 });
 
 /*
@@ -94,8 +111,9 @@ const rootReducer = combineReducers({
 
 let defaultState = {
   counter : 100,
-  dogs : [{name : 'snickers', hearts : 0}, {name : 'Hugo', hearts : 0}, {name :'Prudence', hearts : 0}]
-}
+  dogs : [{name : 'snickers', hearts : 0}, {name : 'Hugo', hearts : 0}, {name :'Prudence', hearts : 0}],
+  items : ['milk','eggs','bread']
+};
 
 const store = createStore(rootReducer, defaultState);
 
@@ -110,8 +128,7 @@ var Counter = React.createClass({
   render() {
     // This line uses ES6 destructuring to make shorter variables. Better than using this.props.increment etc...
 
-    const { increment, decrement, heart, counter, dogs } = this.props
-    console.log(dogs);
+    const { increment, decrement, heart, counter, dogs } = this.props;
 
     // Then we go ahead and return some JSX
     return (
@@ -123,8 +140,10 @@ var Counter = React.createClass({
           <button onClick={heart.bind(null,1)}>Add a heart to hugo</button>
         </p>
         {dogs.map((dog,i) => <Dog heart={heart} key={i} i={i} dog={dog} />)}
+
+        <ShoppingList {...this.props} />
       </div>
-    )
+    );
   }
 });
 
@@ -142,6 +161,25 @@ var Dog = React.createClass({
   }
 });
 
+var ShoppingList = React.createClass({
+  displayName : 'ShoppingList',
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.addItem(this.refs.item.value);
+  },
+  render() {
+    return (
+      <div>
+        t
+        {this.props.items.map((item,i) => <p key={i}>{item}</p>)}
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" ref="item"/>
+          <input type="submit"/>
+        </form>
+      </div>
+    )
+  }
+});
 
 /*
   Mapping
@@ -159,8 +197,9 @@ function mapStateToProps(state) {
   // Here we make state.counter available via `this.props.counter`
   return {
     counter: state.counter,
-    dogs : state.dogs
-  }
+    dogs : state.dogs,
+    items : state.items
+  };
 }
 
 
@@ -168,14 +207,14 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   // Here we are providing and object of all the actions that need to be made available via props
   // We have three: increment, and decrement and heart
-  return bindActionCreators(actionCreators, dispatch)
+  return bindActionCreators(actionCreators, dispatch);
   /* Note: bindActionCreators will alos make these actions available to all children */
 }
 
 // We create an <App/> component which is just our <Counter/> component with it's props
 // populated with our functions (increment & decrement) and our state (counter)
 
-var App = connect(mapStateToProps, mapDispatchToProps)(Counter)
+var App = connect(mapStateToProps, mapDispatchToProps)(Counter);
 
 /*
   Rendering
@@ -186,4 +225,4 @@ render(
     <App />
   </Provider>,
   document.getElementById('root')
-)
+);

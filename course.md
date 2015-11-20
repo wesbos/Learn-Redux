@@ -1,4 +1,7 @@
 ## Stores
+First start with some default state and get that showing
+
+then we should use a reducer to work with and modify the state
 
 ## Actions
 
