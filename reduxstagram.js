@@ -5,7 +5,6 @@ import { connect, Provider } from 'react-redux';
 
 import photos from './photos';
 import allComments from './comments';
-import Login from './components/Login'
 
 import * as actionCreators from './actions/actionCreators';
 
