@@ -19,6 +19,7 @@ state = {
 Where do the actions get triggerd?
 Where does the state get modified?
 Why can't we just push onto existing state?
+Why can we use slice, but not splice?!
 
 1. First we are going to load in some existing state - how do we get the data from our store into our components
 

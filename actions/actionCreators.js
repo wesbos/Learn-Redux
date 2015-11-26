@@ -1,0 +1,52 @@
+/**
+  Action Creators
+  
+  These fire events which the reducer will handle
+  We will later call these functions from inside our component 
+
+  Later these functions get bound to 'dispatch' fires the actual event
+  Right now they just return an object
+
+  It's a code convention to use all capitals and snake case for the event names
+  We use const to store the name of the event so it is immutable
+
+*/
+
+export function increment(i) {
+  return {
+    type: 'INCREMENT_COUNTER',
+    index : i
+  };
+}
+
+export function decrement() {
+  return {
+    type: 'DECREMENT_COUNTER'
+  };
+}
+
+
+export function addItem(text) {
+  return {
+    type : 'ADD_ITEM',
+    text
+  };
+}
+
+export function addComment(postId, author, comment) {
+  console.log("adding a comment");
+  return {
+    type : 'ADD_COMMENT',
+    postId,
+    author,
+    comment
+  };
+}
+
+export function removeComment(postId, i){
+  return {
+    type : 'REMOVE_COMMENT',
+    postId,
+    i
+  }
+}
