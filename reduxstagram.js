@@ -3,6 +3,10 @@ import { render } from 'react-dom';
 import { createStore, combineReducers, bindActionCreators } from 'redux';
 import { connect, Provider } from 'react-redux';
 
+import photos from './photos';
+import allComments from './comments';
+import Login from './components/Login'
+
 /*
   Action Creators
   
@@ -19,15 +23,17 @@ import { connect, Provider } from 'react-redux';
 
 const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
 const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
-const ADD_HEART = 'ADD_HEART';
+const ADD_COMMENT = 'ADD_COMMENT';
+const REMOVE_COMMENT = 'REMOVE_COMMENT';
 const ADD_ITEM = 'ADD_ITEM';
 const REMOVE_ITEM = 'REMOVE_ITEM';
 
 
 /* TODO: Figure out how to call these directly from the dispatcher */
-function increment() {
+function increment(i) {
   return {
-    type: INCREMENT_COUNTER
+    type: INCREMENT_COUNTER,
+    index : i
   };
 }
 
@@ -37,12 +43,6 @@ function decrement() {
   };
 }
 
-function heart(dogNo) {
-  return {
-    type : ADD_HEART,
-    dogNo
-  };
-}
 
 function addItem(text) {
   return {
@@ -51,7 +51,25 @@ function addItem(text) {
   };
 }
 
-var actionCreators = {increment, decrement, heart, addItem};
+function addComment(postId, author, comment) {
+  console.log("adding a comment");
+  return {
+    type : ADD_COMMENT,
+    postId,
+    author,
+    comment
+  };
+}
+
+function removeComment(postId, i){
+  return {
+    type : REMOVE_COMMENT,
+    postId,
+    i
+  }
+}
+
+var actionCreators = {increment, decrement, addItem, addComment, removeComment};
 
 /*
   Reducers
@@ -63,7 +81,7 @@ var actionCreators = {increment, decrement, heart, addItem};
 
 */
 
-function counter(state = 0, action) {
+function user(state = {}, action) {
   switch (action.type) {
     case INCREMENT_COUNTER:
       return state + 1;
@@ -74,19 +92,13 @@ function counter(state = 0, action) {
   }
 }
 
-function dogs(state = [], action) {
+function posts(state = [], action) {
+  console.log(action);
   switch (action.type) {
-    case ADD_HEART:
-      var newState = state.slice(); // make a copy because we shouldn't mutate the state directly
-      newState[action.dogNo].hearts++;
+    case INCREMENT_COUNTER :
+      var newState = state.slice();
+      newState[action.index].likes++;
       return newState;
-    default:
-      return state;
-  }
-}
-
-function items(state = [], action) {
-  switch (action.type) {
     case ADD_ITEM :
       var newState = state.slice();
       newState.push(action.text);
@@ -98,9 +110,24 @@ function items(state = [], action) {
   }
 }
 
+function comments(state = {}, action) {
+  switch(action.type) {
+    case ADD_COMMENT : 
+      var newState = Object.assign({},state);
+      newState[action.postId] = newState[action.postId] || [];
+      newState[action.postId].push({author : action.author, comment : action.comment});
+      return newState;
+    case REMOVE_COMMENT : 
+      console.log("From the reducer!", action);
+      return state;
+    default : 
+      return state;
+  }
+}
+
 // Combine all our reducers into a single file
 const rootReducer = combineReducers({
-  counter, dogs, items
+  user, posts, comments
 });
 
 /*
@@ -112,9 +139,9 @@ const rootReducer = combineReducers({
 */
 
 let defaultState = {
-  counter : 100,
-  dogs : [{name : 'snickers', hearts : 0}, {name : 'Hugo', hearts : 0}, {name :'Prudence', hearts : 0}],
-  items : ['milk','eggs','bread']
+  user : { username : 'wesbos', name : 'Wes Bos', bio : 'Wes is a cool guy' },
+  posts : photos,
+  comments : allComments,
 };
 
 const store = createStore(rootReducer, defaultState);
@@ -125,65 +152,84 @@ const store = createStore(rootReducer, defaultState);
   This is where the actual interface / view comes into play
 */
 
-var Counter = React.createClass({
-  displayName : 'Counter',
+var Main = React.createClass({
+  displayName : 'Main',
   render() {
-    // This line uses ES6 destructuring to make shorter variables. Better than using this.props.increment etc...
-
-    const { increment, decrement, heart, counter, dogs } = this.props;
-
     // Then we go ahead and return some JSX
     return (
       <div>
-        <p>
-          Clicked: {counter} times
-          <button onClick={increment}>+</button>
-          <button onClick={decrement}>-</button>
-          <button onClick={heart.bind(null,1)}>Add a heart to hugo</button>
-        </p>
-        {dogs.map((dog,i) => <Dog heart={heart} key={i} i={i} dog={dog} />)}
-
-        <ShoppingList {...this.props} />
+        <PhotoGrid {...this.props} />
       </div>
     );
   }
 });
 
 
-var Dog = React.createClass({
-  displayName : 'Dog',
-  render() {
-    let dog = this.props.dog;
-    return (
-      <div>
-         <h2>{dog.name}</h2>
-        <button onClick={this.props.heart.bind(null,this.props.i)}>{dog.hearts}</button>
-      </div>
-    );
-  }
-});
-
-var ShoppingList = React.createClass({
-  displayName : 'ShoppingList',
+var PhotoGrid = React.createClass({
+  displayName : 'PhotoGrid',
   handleSubmit(e) {
     e.preventDefault();
     this.props.addItem(this.refs.item.value);
   },
-  renderItem(item, i) {
+  componentDidMount() {
+    
+  },
+  renderItem(post, i) {
+    var { comments } = this.props;
     return (
-      <p key={i}>{item}</p>
+      <figure key={i}>
+        <img src={post.src} alt={post.caption}/>
+        <figcaption>
+          <p>{post.caption}</p>
+          <button onClick={this.props.increment.bind(null,i)} className="likes">❤️{post.likes}</button>
+        </figcaption>
+        <Comments {...this.props} comments={comments[post.id]} postId={post.id} />
+      </figure>
     );
   },
   render() {
+    let { posts, increment } = this.props;
     return (
-      <div>
-        {this.props.items.map(this.renderItem)}
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" ref="item"/>
+      <div className="PhotoGrid">
+        {posts.map(this.renderItem)}
+      </div>
+    );
+  }
+});
+
+const Comments = React.createClass({
+  renderComment(data, i) {
+    return (
+      <div className="comment" key={i}>
+        <p>
+          <strong>{data.author} : </strong>
+          {data.comment}
+          <button onClick={this.props.removeComment.bind(null,this.props.postId, i)}>&times;</button>
+        </p>
+      </div>
+    );
+  },
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.addComment(this.props.postId, this.refs.author.value, this.refs.comment.value);
+    this.refs.commentForm.reset();
+  },
+  render() {
+
+    let { comments = [] } = this.props;
+
+    return (
+      <div className="comments">
+        <div className="comment">
+          {comments.map(this.renderComment)}
+        </div>
+        <form onSubmit={this.handleSubmit} ref="commentForm">
+          <input type="text" ref="author" placeholder="author"/>
+          <input type="text" ref="comment" placeholder="comment"/>
           <input type="submit"/>
         </form>
       </div>
-    );
+    )
   }
 });
 
@@ -202,9 +248,8 @@ var ShoppingList = React.createClass({
 function mapStateToProps(state) {
   // Here we make state.counter available via `this.props.counter`
   return {
-    counter: state.counter,
-    dogs : state.dogs,
-    items : state.items
+    posts: state.posts,
+    comments : state.comments
   };
 }
 
@@ -212,20 +257,21 @@ function mapStateToProps(state) {
 /* This will make the bind our actions to dispatch (make the fire-able) and */
 function mapDispatchToProps(dispatch) {
   // Here we are providing and object of all the actions that need to be made available via props
-  // We have three: increment, and decrement and heart
+  // We have three: increment, and decrement
   return bindActionCreators(actionCreators, dispatch);
   /* Note: bindActionCreators will alos make these actions available to all children */
 }
 
-// We create an <App/> component which is just our <Counter/> component with it's props
+// We create an <App/> component which is just our <Main/> component with it's props
 // populated with our functions (increment & decrement) and our state (counter)
 
-var App = connect(mapStateToProps, mapDispatchToProps)(Counter);
+var App = connect(mapStateToProps, mapDispatchToProps)(Main);
 
 /*
   Rendering
   This is where we hook up the Store with our actual component 
 */
+
 render(
   <Provider store={store}>
     <App />
