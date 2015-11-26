@@ -3,8 +3,9 @@ import { render } from 'react-dom';
 import { createStore, combineReducers, bindActionCreators } from 'redux';
 import { connect, Provider } from 'react-redux';
 
-import photos from './photos';
-import allComments from './comments';
+// Import some dummy data - this could come from an API
+import photos from './data/photos';
+import allComments from './data/comments';
 
 import * as actionCreators from './actions/actionCreators';
 
