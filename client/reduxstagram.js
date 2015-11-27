@@ -2,11 +2,11 @@ import React from 'react';
 import { render } from 'react-dom';
 import { createStore, combineReducers, bindActionCreators } from 'redux';
 import { connect, Provider } from 'react-redux';
-
-
 import * as actionCreators from './actions/actionCreators';
-
 import store from './store';
+
+// bring in css
+import css from  './styles/style.styl';
 
 /*
   Components

@@ -5,9 +5,9 @@ const Comments = React.createClass({
     return (
       <div className="comment" key={i}>
         <p>
-          <strong>{data.author} : </strong>
+          <strong>{data.author}</strong>
           {data.comment}
-          <button onClick={this.props.removeComment.bind(null,this.props.postId, i)}>&times;</button>
+          <button className="remove-comment" onClick={this.props.removeComment.bind(null,this.props.postId, i)}>&times;</button>
         </p>
       </div>
     );
@@ -23,13 +23,11 @@ const Comments = React.createClass({
 
     return (
       <div className="comments">
-        <div className="comment">
-          {comments.map(this.renderComment)}
-        </div>
-        <form onSubmit={this.handleSubmit} ref="commentForm">
+        {comments.map(this.renderComment)}
+        <form onSubmit={this.handleSubmit} ref="commentForm" className="comment-form">
           <input type="text" ref="author" placeholder="author"/>
           <input type="text" ref="comment" placeholder="comment"/>
-          <input type="submit"/>
+          <input type="submit" hidden/>
         </form>
       </div>
     )

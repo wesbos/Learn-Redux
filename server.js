@@ -44,9 +44,9 @@ app.use(function(req, res, next) {
 //   });
 // });
 
-var template = fs.readFileSync(__dirname + '/index.html', 'utf8');
 
 app.get('*', function(req, res, next) {
+  var template = fs.readFileSync(__dirname + '/index.html', 'utf8');
   res.send(template);
 });
 

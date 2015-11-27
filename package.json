@@ -37,6 +37,7 @@
     "style-loader": "^0.12.4",
     "webpack": "^1.12.1",
     "webpack-dev-middleware": "^1.2.0",
-    "webpack-hot-middleware": "^2.0.1"
+    "webpack-hot-middleware": "^2.0.1",
+    "stylus-loader": "^1.4.2"
   }
 }

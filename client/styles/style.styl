@@ -1,3 +1,51 @@
-body
-  background red
+@import '_normalize.styl'
+@import '_typography.styl'
 
+body
+  background offwhite
+
+.PhotoGrid
+  display flex
+  flex-wrap wrap
+  figure
+    flex-basis calc(33.333% - 4rem)
+    margin 0 2rem 2rem 2rem
+    padding 2rem
+    border 1px solid lightgray
+    background white
+    box-shadow 0 0 0 5px rgba(0,0,0,0.03); 
+  .grid-photo
+    width calc(100% + 4rem)
+    margin-left -2rem
+    margin-top -2rem
+    max-width none
+
+// Comments
+.remove-comment
+  background none
+  border 0
+  line-height 1
+  opacity 0
+  &:hover
+    color red
+
+.comment
+  border-bottom 1px solid lightgrey
+  padding 0.5rem 0
+  p
+    font-size 1.2rem
+    margin 0
+  strong
+    color blue
+    margin-right 5px
+  &:hover
+    .remove-comment
+      opacity 1
+ 
+.comment-form 
+  input
+    width 100%
+    border 0
+    font-size 1.3rem
+    padding 1rem 0
+    border-bottom 1px solid lightgrey

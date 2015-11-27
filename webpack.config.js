@@ -50,11 +50,10 @@ module.exports = {
 
     // CSS
     { 
-      test: /\.css$/, 
+      test: /\.styl$/, 
       include: path.join(__dirname, 'client'),
-      loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[path][name]-[local]'
+      loader: 'style-loader!css-loader!stylus-loader'
     }
-
     ]
   }
 };

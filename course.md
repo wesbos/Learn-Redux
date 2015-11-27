@@ -1,4 +1,5 @@
 ## Reduxstagram
+These notes probably make no sense to anyone but me
 
 ## Fundamentals
 Your state is one huge object - no matter how many components you have. 

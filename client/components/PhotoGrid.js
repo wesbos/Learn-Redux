@@ -14,10 +14,11 @@ const PhotoGrid = React.createClass({
     var { comments } = this.props;
     return (
       <figure key={i}>
-        <img src={post.src} alt={post.caption} onDoubleClick={this.props.increment.bind(null,i)}/>
+        <img className="grid-photo" src={post.src} alt={post.caption} onDoubleClick={this.props.increment.bind(null,i)}/>
         <figcaption>
           <p>{post.caption}</p>
-          <button onClick={this.props.increment.bind(null,i)} className="likes">❤️{post.likes}</button>
+          <button onClick={this.props.increment.bind(null,i)} className="likes">&hearts;{post.likes}</button>
+          <span className="comment-count">&#x1f4ac;💬</span>
         </figcaption>
         <Comments {...this.props} comments={comments[post.id]} postId={post.id} />
       </figure>
