@@ -1,16 +1,60 @@
-var path = require("path");
-var WebpackDevServer = require("webpack-dev-server");
-var webpack = require("webpack");
+var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
-  entry : 'reduxstagram.js',
-  output : {
-    filename : 'bundle.js',
-    path : __dirname 
+  devtool: '#eval-source-map',
+  entry: [
+    'webpack-hot-middleware/client',
+    './client/reduxstagram.js'
+  ],
+  output: {
+    path: __dirname,
+    filename: 'bundle.js',
+    publicPath: '/'
+  },
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ],
+  resolve: {
+    extensions: ['', '.js'],
+    alias: {
+      request: 'browser-request'
+    }
   },
   module: {
-      loaders: [
-          { test: /\.js$/, loaders: ['babel?presets[]=es2015'], exclude: /node_modules/ }
-      ]
+    loaders: [
+    // Javascript
+    {
+      test: /\.js$/,
+      loader: 'babel',
+      include: path.join(__dirname, 'client'),
+      query: {
+        optional: ['runtime'],
+        plugins: [
+          'react-display-name',
+          'react-transform'
+        ],
+        extra: {
+          'react-transform': {
+            'transforms': [{
+              'transform': 'react-transform-hmr',
+              'imports': ['react'],
+              'locals': ['module']
+            }]
+          }
+        }
+      }
+    },
+
+    // CSS
+    { 
+      test: /\.css$/, 
+      include: path.join(__dirname, 'client'),
+      loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[path][name]-[local]'
+    }
+
+    ]
   }
-}
+};

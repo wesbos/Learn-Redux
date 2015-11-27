@@ -1,35 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Simple Redux</title>
-</head>
-<body>
-  
-  <div id="root"></div>
-  <script src="bundle.js"></script>
-
-  <style>
-    img {
-      max-width:100%;
-    }
-
-    .PhotoGrid {
-      display: flex;
-      flex-wrap:wrap;
-    }
-
-    figure {
-      flex-basis:20%;
-    }
-
-    figure span {
-      background:#BADA55;
-      border-radius: 5px;
-      margin: 1px;
-      padding:2px;
-    }
-
-  </style>
-</body>
+<html>
+  <head>
+    <title>Reduxstagram!</title>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <div id="root"><!-- CONTENT --></div>
+  </body>
+  <script type="text/javascript">
+    /* eslint-env browser */
+    window.initialStoreData = "-- STORES --";
+  </script>
+  <script src="/bundle.js"></script>
 </html>
