@@ -19,10 +19,16 @@
   "devDependencies": {
     "autobind-decorator": "^1.3.2",
     "babel": "^6.1.18",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
     "babel-preset-stage-0": "^6.1.18",
     "babelify": "^7.2.0",
+    "browser-sync-webpack-plugin": "^1.0.1",
     "eslint-plugin-react": "^3.9.0",
     "history": "^1.13.1",
-    "react-router": "^1.0.0"
+    "react-router": "^1.0.0",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0"
   }
 }

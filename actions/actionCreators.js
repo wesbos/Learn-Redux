@@ -34,12 +34,11 @@ export function addItem(text) {
 }
 
 export function addComment(postId, author, comment) {
-  console.log("adding a comment");
   return {
     type : 'ADD_COMMENT',
     postId,
-    author,
-    comment
+    author, // same as author: author
+    comment // same as comment: comment
   };
 }
 
