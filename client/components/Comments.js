@@ -1,4 +1,5 @@
 import React from 'react';
+
 const Comments = React.createClass({
   renderComment(data, i) {
     return (
@@ -30,7 +31,7 @@ const Comments = React.createClass({
           <input type="submit" hidden/>
         </form>
       </div>
-    )
+    );
   }
 });
 

@@ -16,8 +16,8 @@ var express = require('express');
 var chokidar = require('chokidar');
 var webpack = require('webpack');
 var config = require('./webpack.config');
-var compiler = webpack(config);
 var fs = require('fs');
+var compiler = webpack(config);
 var app = express();
 
 // Serve hot-reloading bundle to client

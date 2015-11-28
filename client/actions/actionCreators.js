@@ -47,5 +47,5 @@ export function removeComment(postId, i){
     type : 'REMOVE_COMMENT',
     postId,
     i
-  }
+  };
 }

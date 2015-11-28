@@ -1,23 +1,8 @@
 import { createStore, combineReducers } from 'redux';
+
 // Import some dummy data - this could come from an API
 import photos from './data/photos';
 import allComments from './data/comments';
-
-
-// module.exports = function configureStore(initialState) {
-//   var store = createStore(require('./reducers'), initialState);
-
-//   if (module.hot) {
-//     // Enable Webpack hot module replacement for reducers
-//     module.hot.accept('./reducers', () => {
-//       var nextRootReducer = require('./reducers');
-//       store.replaceReducer(nextRootReducer);
-//     });
-//   }
-
-//   return store;
-// };
-
 
 /**
   Reducers
@@ -45,7 +30,7 @@ const rootReducer = combineReducers({ posts, comments });
 
 let defaultState = {
   posts : photos,
-  comments : allComments,
+  comments : allComments
 };
 
 const store = createStore(rootReducer, defaultState);

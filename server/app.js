@@ -1,9 +1,3 @@
-var express = require('express');
-
+import express from 'express';
 var app = express.Router();
-
-app.get('/whoami', (req, res) => {
-  res.send("You are a winner");
-});
-
-module.exports = app;
+export default app;

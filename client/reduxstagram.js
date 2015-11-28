@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { createStore, combineReducers, bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import { connect, Provider } from 'react-redux';
 import * as actionCreators from './actions/actionCreators';
 import store from './store';
@@ -10,8 +10,8 @@ import css from  './styles/style.styl';
 
 /*
   Components
-
   This is where the actual interface / view comes into play
+  Everything is in Main - so we import that one
 */
 
 import Main from './components/Main';
