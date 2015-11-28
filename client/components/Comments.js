@@ -1,5 +1,4 @@
 import React from 'react';
-
 const Comments = React.createClass({
   renderComment(data, i) {
     return (
@@ -23,6 +22,7 @@ const Comments = React.createClass({
 
     return (
       <div className="comments">
+        
         {comments.map(this.renderComment)}
         <form onSubmit={this.handleSubmit} ref="commentForm" className="comment-form">
           <input type="text" ref="author" placeholder="author"/>

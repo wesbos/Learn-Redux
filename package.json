@@ -1,9 +1,9 @@
 {
-  "name": "ultimate-hot-reloading-example ",
+  "name": "reduxstagram",
   "version": "1.0.0",
   "private": true,
-  "description": "React example",
-  "author": "Glen Mailer <glen@stainlessed.co.uk>",
+  "description": "Redux Example",
+  "author": "Wes Bos <wes@wesbos.com>",
   "license": "MIT",
   "scripts": {
     "start": "node server.js",
@@ -28,16 +28,21 @@
     "postcss-modules-extract-imports": "0.0.6",
     "postcss-modules-local-by-default": "0.0.12",
     "postcss-modules-scope": "0.0.8",
-    "react-transform-hmr": "^1.0.0",
     "react": "^0.14.2",
+    "react-addons-css-transition-group": "^0.14.3",
     "react-dom": "^0.14.2",
+    "react-motion-ui-pack": "^0.5.2",
     "react-redux": "^4.0.0",
+    "react-transform-hmr": "^1.0.0",
     "redux": "^3.0.4",
     "request": "^2.61.0",
     "style-loader": "^0.12.4",
+    "stylus-loader": "^1.4.2",
     "webpack": "^1.12.1",
     "webpack-dev-middleware": "^1.2.0",
-    "webpack-hot-middleware": "^2.0.1",
-    "stylus-loader": "^1.4.2"
+    "webpack-hot-middleware": "^2.0.1"
+  },
+  "devDependencies": {
+    "react-motion": "^0.3.1"
   }
 }

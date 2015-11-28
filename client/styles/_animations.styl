@@ -1,0 +1,18 @@
+// offset variable gets tacked for centering in addition to the scaling
+
+offsets = translateX(-50%) translateY(-50%)
+.likes-heart
+  opacity 0
+  display none
+  transition all .5s
+  transform offsets scale(2.1)
+  &.like-enter
+    display block
+    transition all .2s
+    transform offsets scale(1)
+    opacity 1
+    &.like-enter-active
+      transform offsets scale(2)
+  .like-leave-active
+    display none
+    
