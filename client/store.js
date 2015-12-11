@@ -33,7 +33,7 @@ let defaultState = {
   comments : allComments
 };
 
-const store = createStore(rootReducer, defaultState);
-// const store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)(rootReducer, defaultState);
+// Load in the devtools, but only on the client side
+const store = (typeof window !== 'undefined' && window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)(rootReducer, defaultState);
 
 export default store;
