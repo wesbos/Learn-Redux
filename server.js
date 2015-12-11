@@ -37,18 +37,18 @@ app.use(function(req, res, next) {
 */
 
 // Anything else gets passed to the client app's server rendering
-// app.get('*', function(req, res, next) {
-//   require('./client/server-render')(req.path, function(err, page) {
-//     if (err) return next(err);
-//     res.send(page);
-//   });
-// });
-
-
 app.get('*', function(req, res, next) {
-  var template = fs.readFileSync(__dirname + '/index.html', 'utf8');
-  res.send(template);
+  require('./client/server-render')(req.path, function(err, page) {
+    if (err) return next(err);
+    res.send(page);
+  });
 });
+
+
+// app.get('*', function(req, res, next) {
+//   var template = fs.readFileSync(__dirname + '/index.html', 'utf8');
+//   res.send(template);
+// });
 
 // Do "hot-reloading" of express stuff on the server
 // Throw away cached modules and re-require next time

@@ -1,6 +1,7 @@
 function comments(state = {}, action) {
   switch(action.type) {
     case 'ADD_COMMENT' : 
+      console.log("adding a comment");
       var newState = Object.assign({},state);
       newState[action.postId] = newState[action.postId] || [];
       newState[action.postId].push({author : action.author, comment : action.comment});

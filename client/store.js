@@ -34,5 +34,6 @@ let defaultState = {
 };
 
 const store = createStore(rootReducer, defaultState);
+// const store = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)(rootReducer, defaultState);
 
 export default store;

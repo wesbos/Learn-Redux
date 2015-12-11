@@ -3,25 +3,18 @@ var fs = require('fs');
 import React from 'react';
 import { render } from 'react-dom';
 import { renderToString } from 'react-dom/server';
-
-var Main = require('./components/Main');
+import store from './store';
+import App from './components/App';
 
 /* eslint-disable no-sync */
 var template = fs.readFileSync(__dirname + '/../index.html', 'utf8');
 /* eslint-enable no-sync */
 
-import store from './store';
 
 function renderApp(path, callback) {
-  // var store = require('./store')();
+  console.log("Going to render on the server...");
 
-  console.log("GOing to render on the server...");
-  console.log(store.getState())
-  debugger;
-
-  var rendered = renderToString(
-    <Main {...store.getState()} dispatch={() => null}/>
-  );
+  var rendered = renderToString(<App store={store}/>);
 
   var page = template
     .replace('<!-- CONTENT -->', rendered)
