@@ -1,4 +1,5 @@
 function comments(state = {}, action) {
+  return state;
   switch(action.type) {
     case 'ADD_COMMENT' : 
       console.log("adding a comment");

@@ -32,10 +32,6 @@ app.use(function(req, res, next) {
 });
 
 
-/**
-  You could enable this for Server side rendering - Great for SEO!
-*/
-
 // Anything else gets passed to the client app's server rendering
 app.get('*', function(req, res, next) {
   require('./client/server-render')(req.path, function(err, page) {
@@ -43,12 +39,6 @@ app.get('*', function(req, res, next) {
     res.send(page);
   });
 });
-
-
-// app.get('*', function(req, res, next) {
-//   var template = fs.readFileSync(__dirname + '/index.html', 'utf8');
-//   res.send(template);
-// });
 
 // Do "hot-reloading" of express stuff on the server
 // Throw away cached modules and re-require next time
