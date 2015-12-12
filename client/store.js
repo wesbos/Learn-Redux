@@ -26,8 +26,6 @@ const store = createStore(rootReducer, defaultState);
 if(module.hot) {
   module.hot.accept('./reducers/', () => {
     const nextRootReducer = require('./reducers/index');
-    console.log("hi?");
-    console.log((store.getState()).posts[0].likes);
     store.replaceReducer(nextRootReducer);
   });
 }
