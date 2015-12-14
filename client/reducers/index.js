@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-
 /**
   Reducers
   reducers match up the fired action with a function that should be called.
@@ -12,8 +11,12 @@ import { combineReducers } from 'redux';
 
 import posts from './posts';
 import comments from './comments';
+import { routeReducer } from 'redux-simple-router' // we need this for react-router 
 
 // Combine all our reducers togeher 
-const rootReducer = combineReducers({ posts, comments });
+const rootReducer = combineReducers({ posts, comments, routing: routeReducer });
+
+
+
 
 export default rootReducer;

@@ -1,6 +1,7 @@
 import React from 'react';
 import Comments from './Comments';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
+import { Link } from 'react-router';
 
 const Photo = React.createClass({
   
@@ -15,7 +16,9 @@ const Photo = React.createClass({
       <figure key={i}>
 
         <div className="grid-photo-wrap">
-          <img className="grid-photo" src={post.src} alt={post.caption} onDoubleClick={e => this.handleDoubleClick(e,i)}/>
+          <Link to={`/view/${post.id}`}>
+            <img className="grid-photo" src={post.src} alt={post.caption} onDoubleClick={e => this.handleDoubleClick(e,i)}/>
+          </Link>
 
           <CSSTransitionGroup transitionName="like" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
             <span key={post.likes} className="likes-heart">{post.likes}</span>

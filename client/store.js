@@ -25,7 +25,7 @@ const store = createStore(rootReducer, defaultState);
 /* Hot Reload Bling */
 if(module.hot) {
   module.hot.accept('./reducers/', () => {
-    const nextRootReducer = require('./reducers/index');
+    const nextRootReducer = require('./reducers/index').default;
     store.replaceReducer(nextRootReducer);
   });
 }

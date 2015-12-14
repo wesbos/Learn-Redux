@@ -3,8 +3,17 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import App from './components/App';
+import Single from './components/Single';
+import PhotoGrid from './components/PhotoGrid';
 // bring in css
 import css from  './styles/style.styl';
+
+import { Router, Route, IndexRoute } from 'react-router'
+import { createHistory } from 'history'
+import { syncReduxAndRouter } from 'redux-simple-router'
+
+const history = createHistory();
+syncReduxAndRouter(history, store)
 
 /*
   Rendering
@@ -13,7 +22,12 @@ import css from  './styles/style.styl';
 
 render(
   <Provider store={store}>
-    <App />
+    <Router history={history}>
+      <Route path="/" component={App}>
+        <IndexRoute component={PhotoGrid} />
+        <Route path="/view/:photoid" component={Single}></Route>
+      </Route>
+    </Router>
   </Provider>,
   document.getElementById('root')
 );

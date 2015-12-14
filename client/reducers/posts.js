@@ -3,7 +3,7 @@ function posts(state = [], action) {
     case 'INCREMENT_COUNTER' :
       var newState = state.slice();
       // Try and change this value to anything other than 10
-      newState[action.index].likes += 10;
+      newState[action.index].likes += 7;
       return newState;
     case 'ADD_ITEM' :
       return state.concat([action.text]);
