@@ -10,21 +10,39 @@ body
   flex-wrap wrap
   max-width 1200px
   margin 0 auto
-  figure
-    flex-basis calc(33.333% - 4rem)
-    flex-grow 1
-    flex-shrink 0
-    margin 0 2rem 2rem 2rem
-    padding 2rem
-    border 1px solid lightgray
-    background white
-    box-shadow 0 0 0 5px rgba(0,0,0,0.03);
-    position relative
+
+.grid-figure
+  flex-basis calc(33.333% - 4rem)
+  flex-grow 1
+  flex-shrink 0
+  margin 0 2rem 2rem 2rem
+  padding 2rem
+  border 1px solid lightgray
+  background white
+  box-shadow 0 0 0 5px rgba(0,0,0,0.03);
+  position relative
+
+.single-photo
+  @extend .grid-figure
+  max-width 900px
+  margin 0 auto
+  display flex
+  background white
+  .grid-figure
+    box-shadow none
+    margin 0 2rem 0 0
+    border 0
+    padding 0
+    flex-basis 65%
   .grid-photo
-    width calc(100% + 4rem)
-    margin-left -2rem
-    margin-top -2rem
-    max-width none
+    width 100%
+    margin 0
+
+.grid-photo
+  width calc(100% + 4rem)
+  margin-left -2rem
+  margin-top -2rem
+  max-width none
 
 // Comments
 .remove-comment
@@ -58,8 +76,10 @@ body
     outline none
     resize vertical
 
+
 .grid-photo-wrap
   position relative
+  
 .likes-heart
   background url(http://f.cl.ly/items/3Y373q2Q3J3Y1j203n0m/Bitmap-3.png) center no-repeat
   background-size contain

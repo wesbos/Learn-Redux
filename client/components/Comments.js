@@ -1,12 +1,13 @@
 import React from 'react';
 
 const Comments = React.createClass({
+  
   renderComment(data, i) {
     return (
       <div className="comment" key={i}>
         <p>
-          <strong>{data.author}</strong>
-          {data.comment}
+          <strong>{data.from.full_name}</strong>
+          {data.text}
           <button className="remove-comment" onClick={this.props.removeComment.bind(null,this.props.postId, i)}>&times;</button>
         </p>
       </div>
@@ -20,11 +21,14 @@ const Comments = React.createClass({
   render() {
 
     let { comments = [] } = this.props;
-
+    if(!comments.length) {
+      return (<div>Loading Comments...</div>)
+    }
     return (
       <div className="comments">
         
         {comments.map(this.renderComment)}
+
         <form onSubmit={this.handleSubmit} ref="commentForm" className="comment-form">
           <input type="text" ref="author" placeholder="author"/>
           <input type="text" ref="comment" placeholder="comment"/>

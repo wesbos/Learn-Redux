@@ -33,6 +33,25 @@ export function addItem(text) {
   };
 }
 
+export function load(posts) {
+  return {
+    type : 'LOAD',
+    posts
+  }
+}
+
+/*
+  Comments
+*/
+
+export function loadComments(comments) {
+  return {
+    type : 'LOAD_COMMENTS',
+    comments
+  };
+}
+
+
 export function addComment(postId, author, comment) {
   return {
     type : 'ADD_COMMENT',

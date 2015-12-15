@@ -1,5 +1,7 @@
 function comments(state = {}, action) {
   switch(action.type) {
+    case 'LOAD_COMMENTS' :
+      return action.comments; 
     case 'ADD_COMMENT' : 
       console.log("adding a comment");
       var newState = Object.assign({},state);

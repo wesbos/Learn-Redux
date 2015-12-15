@@ -1,20 +1,42 @@
 import React from 'react';
 import Photo from './Photo';
+import Comments from './Comments';
 import { findWhere, findIndex } from 'lodash';
+import jsonp from 'jsonp';
+import { commentEndpoint } from '../data/endpoints';
 
 const Single = React.createClass({
+  
   displayName : 'Single',
-  componentDidMount() {
+
+  componentWillMount() {
     // find the post that we want    
-    var i = findIndex(this.props.posts,(post)=> post.id === this.props.params.photoid);
-    this.setState({ i : i });
+    jsonp(commentEndpoint(this.props.params.photoid),null,(err, response) => {
+      if(err) {
+        console.error(err);
+        return;
+      }
+      console.log("Got the comments:", response.data);
+
+      this.props.loadComments(response.data);
+    });
+
   },
+  
   render() {
+    var i = findIndex(this.props.posts,(post)=> post.id === this.props.params.photoid);
+    
     // Then we go ahead and return some JSX
+    if(i < 0) {
+      return (<strong>Loading...</strong>);
+    }
+
     return (
       <div>
-        <strong>Hi</strong>
-        {<Photo key={this.state.i} i={this.state.i} post={this.props.posts[this.state.i]} {...this.props} />}
+        <div className="single-photo">
+          <Photo key={i} i={i} post={this.props.posts[i]} {...this.props} />
+          <Comments {...this.props} postId={i} />
+        </div>
       </div>
     );
   }
