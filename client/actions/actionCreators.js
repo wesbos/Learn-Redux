@@ -44,10 +44,11 @@ export function load(posts) {
   Comments
 */
 
-export function loadComments(comments) {
+export function loadComments(comments, postId) {
   return {
     type : 'LOAD_COMMENTS',
-    comments
+    comments,
+    postId
   };
 }
 

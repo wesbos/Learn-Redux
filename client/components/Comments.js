@@ -8,22 +8,24 @@ const Comments = React.createClass({
         <p>
           <strong>{data.from.full_name}</strong>
           {data.text}
-          <button className="remove-comment" onClick={this.props.removeComment.bind(null,this.props.postId, i)}>&times;</button>
+          <button className="remove-comment" onClick={this.props.removeComment.bind(null,this.props.params.postId, i)}>&times;</button>
         </p>
       </div>
     );
   },
   handleSubmit(e) {
     e.preventDefault();
-    this.props.addComment(this.props.postId, this.refs.author.value, this.refs.comment.value);
+    this.props.addComment(this.props.params.postId, this.refs.author.value, this.refs.comment.value);
     this.refs.commentForm.reset();
   },
   render() {
 
-    let { comments = [] } = this.props;
+    const comments = this.props.comments[this.props.params.postId] || [];
+
     if(!comments.length) {
       return (<div>Loading Comments...</div>)
     }
+    
     return (
       <div className="comments">
         

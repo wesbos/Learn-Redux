@@ -1,8 +1,6 @@
 import { createStore, combineReducers } from 'redux';
 
 // Import some dummy data - this could come from an API
-import photos from './data/photos';
-import allComments from './data/comments';
 import rootReducer from './reducers/index';
 
 /*
@@ -10,25 +8,31 @@ import rootReducer from './reducers/index';
 
   Redux apps have a single store which takes
   1. All Reducers which we combined into `rootReducer`
-  2. An optional starting state - here I'm setting the counter to 100 on load
-  
+  2. An optional starting state - similar to React's getInitialState
 */
 
-let defaultState = {
+const defaultState = {
   posts : [],
   comments : {}
 };
 
+/*
+  Create our store which will hold all of our data.
+  Normally this would look like this:
 
-// Load in the devtools, but only on the client side
+    const store = createStore(rootReducer, defaultState);
+
+  But we are using the redux dev tools chrome extension so it requires a little more setup. 
+*/
 
 const store = (typeof window !== 'undefined' && window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)(rootReducer, defaultState);
 
-// const store = createStore(rootReducer, defaultState);
+/*
+  Enable Hot Reloading for the reducers
+  We re-require() the reducers whenever any new code has been written.
+  Webpack will handle the rest
+*/
 
-
-
-/* Hot Reload Bling */
 if(module.hot) {
   module.hot.accept('./reducers/', () => {
     const nextRootReducer = require('./reducers/index').default;

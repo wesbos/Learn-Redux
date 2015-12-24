@@ -1,7 +1,3 @@
-/*
-  This is just the <Main/> component, but with the state and the actionCreators applied to the props
-*/
-
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions/actionCreators';
@@ -17,34 +13,46 @@ import Main from './Main';
 /*
   Mapping
 
+  This is where the magic of redux comes in.
+
   We need a way to make
   1. our state (our data)
   2. our 'dispatch' functions 
-  available to the <Counter /> component.
+  available to the <Main /> component.
 
   We will surface state and functions via props (this.props.whatever)
 
 */
 
+
+/*
+  Here we specify which state needs to be made avaialble to the component
+  our state.posts and state.comments will be available via this.props.posts and this.props.comments
+*/
+
 function mapStateToProps(state) {
-  // Here we make state.counter available via `this.props.counter`
   return {
     posts: state.posts,
     comments : state.comments
   };
 }
 
+/*
+  This will bind our actions to dispatch (make the fire-able)
+  and make the actions available via props
+*/
 
-/* This will make the bind our actions to dispatch (make the fire-able) and */
 function mapDispatchToProps(dispatch) {
-  // Here we are providing and object of all the actions that need to be made available via props
-  // We have three: increment, and decrement
   return bindActionCreators(actionCreators, dispatch);
-  /* Note: bindActionCreators will alos make these actions available to all children */
 }
 
-// We create an <App/> component which is just our <Main/> component with it's props
-// populated with our functions (increment & decrement) and our state (counter)
+
+/*
+  Here we create an <App/> component which is just our <Main/> component with it's props
+  populated with our actions and our state
+
+  We're injecting the data at the top level and passing it down, but you can connect() any component to make the actions and the store available to you. 
+*/
  
 var App = connect(mapStateToProps, mapDispatchToProps)(Main);
 

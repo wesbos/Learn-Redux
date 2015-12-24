@@ -5,6 +5,7 @@ import jsonp from 'jsonp';
 import { Link } from 'react-router';
 
 const Main = React.createClass({
+
   displayName : 'Main',
 
   componentWillMount() {

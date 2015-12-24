@@ -5,6 +5,8 @@ import { Link } from 'react-router';
 
 const Photo = React.createClass({
   
+  displayName : 'Photo',
+  
   handleDoubleClick(e, i) {
     const { offsetX, offsetY } = e.nativeEvent;
     this.props.increment(i);
@@ -15,8 +17,8 @@ const Photo = React.createClass({
     return (
       <figure key={i} className="grid-figure">
         
-        <div className="grid-photo-wrap">
-            <img className="grid-photo" src={post.images.standard_resolution.url} alt={post.caption.text} onDoubleClick={e => this.handleDoubleClick(e,i)}/>
+        <div className='grid-photo-wrap'>
+            <img className='grid-photo' src={post.images.standard_resolution.url} alt={post.caption.text} onDoubleClick={(e) => this.handleDoubleClick(e,i)}/>
 
           <CSSTransitionGroup transitionName="like" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
             <span key={post.likes.count} className="likes-heart">{post.likes.count}</span>
@@ -43,7 +45,7 @@ const Photo = React.createClass({
 
         <div className="grid-photo-wrap">
           <Link to={`/view/${post.id}`}>
-            <img className="grid-photo" src={post.src} alt={post.caption} onDoubleClick={e => this.handleDoubleClick(e,i)}/>
+            <img className="grid-photo" src={post.src} alt={post.caption} onDoubleClick={(e) => this.handleDoubleClick(e,i)}/>
           </Link>
 
           <CSSTransitionGroup transitionName="like" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
