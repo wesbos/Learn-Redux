@@ -7,18 +7,15 @@ const Photo = React.createClass({
   
   displayName : 'Photo',
   
-  handleDoubleClick(e, i) {
-    const { offsetX, offsetY } = e.nativeEvent;
-    this.props.increment(i);
-  },
-
   render() {
     var { post, i } = this.props;
     return (
       <figure key={i} className="grid-figure">
         
         <div className='grid-photo-wrap'>
-            <img className='grid-photo' src={post.images.standard_resolution.url} alt={post.caption.text} onDoubleClick={(e) => this.handleDoubleClick(e,i)}/>
+          <Link to={`/view/${post.id}`}>
+            <img className='grid-photo' src={post.images.standard_resolution.url} alt={post.caption.text} />
+          </Link>
 
           <CSSTransitionGroup transitionName="like" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
             <span key={post.likes.count} className="likes-heart">{post.likes.count}</span>
@@ -59,7 +56,6 @@ const Photo = React.createClass({
           <button onClick={this.props.increment.bind(null,i)} className="likes">&hearts;{post.likes}</button>
           <span className="comment-count">&#x1f4ac;💬</span>
         </figcaption>
-        {/*<Comments {...this.props} comments={comments[post.id]} postId={post.id} />*/}
       </figure>
     );
   }

@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Comments = React.createClass({
-  
   renderComment(data, i) {
     return (
       <div className="comment" key={i}>
@@ -22,7 +21,7 @@ const Comments = React.createClass({
 
     const comments = this.props.comments[this.props.params.postId] || [];
 
-    if(!comments.length) {
+    if(!this.props.commentsLoaded) {
       return (<div>Loading Comments...</div>)
     }
     
