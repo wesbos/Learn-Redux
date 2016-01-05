@@ -1,10 +1,9 @@
 function posts(state = [], action) {
   switch (action.type) {
-    /*TODO: Is this an anti-pattern? https://github.com/coodoo/react-redux-isomorphic-example/issues/9 */
     case 'LOAD' :
-      var posts = action.posts.slice();
-      return posts;
+      return [...action.posts];
     case 'INCREMENT_LIKES' :
+      /*TODO: Make this deep clone - this is mutation and is will cause issues with time travel and testing */
       var newState = state.slice();
       newState[action.index].likes.count += 1;
       return newState;
