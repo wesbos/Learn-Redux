@@ -14,7 +14,7 @@
 
 export function increment(i) {
   return {
-    type: 'INCREMENT_COUNTER',
+    type: 'INCREMENT_LIKES',
     index : i
   };
 }
@@ -34,6 +34,7 @@ export function addItem(text) {
 }
 
 export function load(posts) {
+  console.log("Loading posts...");
   return {
     type : 'LOAD',
     posts

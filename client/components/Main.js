@@ -9,12 +9,14 @@ const Main = React.createClass({
   displayName : 'Main',
 
   componentWillMount() {
+    console.log('Mounted...');
     jsonp(mediaEndpoint(),null, (err,response)=> {
       if(err) {
         console.error(err);
         return;
       }
       console.log(response);
+      console.log('About to call load again');
       this.props.load(response.data);
     });
     

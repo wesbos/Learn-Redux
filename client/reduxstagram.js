@@ -10,6 +10,7 @@ import css from  './styles/style.styl';
 
 import { Router, Route, IndexRoute } from 'react-router'
 import { createHistory } from 'history'
+import { browserHistory } from 'react-router'
 import { syncReduxAndRouter } from 'redux-simple-router'
 
 const history = createHistory();
@@ -22,7 +23,7 @@ syncReduxAndRouter(history, store)
 
 render(
   <Provider store={store}>
-    <Router history={history}>
+    <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={PhotoGrid} />
         <Route path="/view/:postId" component={Single}></Route>

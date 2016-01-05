@@ -26,8 +26,9 @@ function comments(state = {}, action) {
       var commentState = Object.assign({},state);
       var comments = commentState[action.postId];
       const i = action.i;
-      /*TODO: Clean this up*/
-      commentState[action.postId] = [...comments.slice(0,i), ...comments.slice(i+1)];
+
+      // commentState[action.postId] = [...comments.slice(0,i), ...comments.slice(i+1)];
+      commentState[action.postId] = comments.slice(0,i).concat(comments.slice(i+1));
       return commentState;
     default : 
       return state;
