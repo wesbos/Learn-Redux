@@ -1,15 +1,14 @@
+import { cloneDeep } from 'lodash';
+
 function posts(state = [], action) {
   switch (action.type) {
     case 'LOAD' :
       return [...action.posts];
     case 'INCREMENT_LIKES' :
-      /* TODO: Make this deep clone - this is mutation and is will cause issues with time travel and testing. Make a note in the video on how slicing the top level array doesn't clone the objects inside of it */
-
-      var newState = state.slice();
+      // Since the data that comes back from the Instagram API has likes 3 levels deep, we use Lodash cloneDeep to make sure we aren't mutating the state and making a true copy
+      var newState = state.map((post) => cloneDeep(post));
       newState[action.index].likes.count += 1;
       return newState;
-    case 'ADD_ITEM' :
-      return state.concat([action.text]);
     default:
       return state;
   }

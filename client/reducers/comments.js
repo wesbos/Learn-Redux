@@ -1,3 +1,5 @@
+import { cloneDeep } from 'lodash';
+
 function comments(state = {}, action) {
   switch(action.type) {
 
@@ -11,7 +13,7 @@ function comments(state = {}, action) {
     
     case 'ADD_COMMENT' :
       // take a copy of state
-      var commentState = Object.assign({},state);
+      var commentState = cloneDeep(state);
       // push the comment into the new state
       commentState[action.postId].push({
         from : { full_name : action.author },
@@ -19,15 +21,12 @@ function comments(state = {}, action) {
       });
       // return our new state
       return commentState;
-    
     case 'REMOVE_COMMENT' : 
       console.log(action);
       // Take a copy of state
-      var commentState = Object.assign({},state);
+      var commentState = cloneDeep(state);
       var comments = commentState[action.postId];
-      const i = action.i;
-
-      // commentState[action.postId] = [...comments.slice(0,i), ...comments.slice(i+1)];
+      var i = action.i;
       commentState[action.postId] = comments.slice(0,i).concat(comments.slice(i+1));
       return commentState;
     default : 
