@@ -21,6 +21,8 @@ const Single = React.createClass({
 
     if(!this.props.comments[postId]) {
       this.fetchComments(postId);
+    } else {
+      this.setState({ commentsLoaded: true })
     }
   },
 

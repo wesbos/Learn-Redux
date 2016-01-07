@@ -8,7 +8,8 @@ const Photo = React.createClass({
   displayName : 'Photo',
   
   render() {
-    var { post, i } = this.props;
+    const { post, i, comments } = this.props;
+    const id = post.id;
     return (
       <figure key={i} className="grid-figure">
         
@@ -25,15 +26,18 @@ const Photo = React.createClass({
 
         <figcaption>
           <p>{post.caption.text}</p>
-          <button onClick={this.props.increment.bind(null,i)} className="likes">&hearts;{post.likes.count}</button>
-  
-          <Link to={`/view/${post.id}`}>
-            <span className="comment-count">{post.comments.count}</span>
-          </Link>
+
+          <div className="control-buttons">
+            <button onClick={this.props.increment.bind(null,i)} className="likes">&hearts; {post.likes.count}</button>
+    
+            <Link to={`/view/${post.id}`} className="button">
+              <span className="comment-count">
+                <span className="speech-bubble"></span> {(comments[id] ? comments[id].length : post.comments.count)}
+              </span>
+            </Link>
+          </div>
 
         </figcaption>
-
-        
 
       </figure>
     )
