@@ -1,4 +1,4 @@
-# Simple Redux
+# Learn Redux
 
 A simple React + Redux implmenatation. This will be turned into a free video series once the app is totally fleshed out.
 

@@ -10,11 +10,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wesbos/simple-redux.git"
+    "url": "https://github.com/wesbos/Learn-Redux.git"
   },
   "author": "Wes Bos",
   "license": "CC0-1.0",
-  "homepage": "https://github.com/wesbos/simple-redux",
+  "homepage": "https://github.com/wesbos/Learn-Redux",
   "dependencies": {
     "babel-core": "^6.3.15",
     "babel-eslint": "^5.0.0-beta4",
