@@ -25,6 +25,8 @@ const defaultState = {
   But we are using the redux dev tools chrome extension so it requires a little more setup. 
 */
 
+/* TODO Only do this in DEVELOPMENT */
+
 const store = (typeof window !== 'undefined' && window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)(rootReducer, defaultState);
 
 /*

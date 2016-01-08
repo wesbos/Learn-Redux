@@ -43,7 +43,7 @@ const Single = React.createClass({
   },
   
   render() {
-    var i = findIndex(this.props.posts,(post)=> post.id === this.props.params.postId);
+    const i = findIndex(this.props.posts,(post)=> post.id === this.props.params.postId);
     
     // Then we go ahead and return some JSX
     if(i < 0) {

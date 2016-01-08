@@ -17,7 +17,4 @@ import { routeReducer } from 'redux-simple-router'; // we need this for react-ro
 // Combine all our reducers togeher 
 const rootReducer = combineReducers({ posts, comments, routing: routeReducer });
 
-// Error logging
-Raven.config('https://cb55d4f05cd443ce82303222f77ef5e0@app.getsentry.com/61499').install()
-
 export default rootReducer;

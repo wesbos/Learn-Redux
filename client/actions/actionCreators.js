@@ -34,7 +34,6 @@ export function addItem(text) {
 }
 
 export function load(posts) {
-  console.log("Loading posts...");
   return {
     type : 'LOAD',
     posts

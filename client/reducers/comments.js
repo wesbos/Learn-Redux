@@ -5,12 +5,12 @@ function comments(state = {}, action) {
 
     case 'LOAD_COMMENTS' :
       // Take a copy of the current state
-      var commentState = Object.assign({}, state);
+      var commentState = cloneDeep(state);
       // Create a new property for this photo in the comments object 
       commentState[action.postId] = action.comments;
       // return our new state
       return commentState;
-    
+
     case 'ADD_COMMENT' :
       // take a copy of state
       var commentState = cloneDeep(state);
@@ -21,6 +21,7 @@ function comments(state = {}, action) {
       });
       // return our new state
       return commentState;
+
     case 'REMOVE_COMMENT' : 
       console.log(action);
       // Take a copy of state
@@ -29,6 +30,7 @@ function comments(state = {}, action) {
       var i = action.i;
       commentState[action.postId] = comments.slice(0,i).concat(comments.slice(i+1));
       return commentState;
+
     default : 
       return state;
   }
