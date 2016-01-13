@@ -1,7 +1,11 @@
-import { createStore, combineReducers } from 'redux';
+import { compose, createStore, combineReducers, applyMiddleware } from 'redux';
+import { syncHistory } from 'redux-simple-router'; 
 
 // Import some dummy data - this could come from an API
 import rootReducer from './reducers/index';
+
+import { createHistory } from 'history'
+
 
 /*
   Store
@@ -22,12 +26,20 @@ const defaultState = {
 
     const store = createStore(rootReducer, defaultState);
 
-  But we are using the redux dev tools chrome extension so it requires a little more setup. 
+  But we are using the redux dev tools chrome extension and the redux-simple-router so it requires a little more setup. 
 */
 
-/* TODO Only do this in DEVELOPMENT */
+const history = createHistory();
+const reduxRouterMiddleware = syncHistory(history);
+const createStoreWithDevTools = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore);
+const createStoreWithMiddleware = applyMiddleware(reduxRouterMiddleware)(createStoreWithDevTools);
+const store = createStoreWithMiddleware(rootReducer, defaultState);
 
-const store = (typeof window !== 'undefined' && window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore)(rootReducer, defaultState);
+/*
+  Sync History to Store
+*/
+
+reduxRouterMiddleware.syncHistoryToStore(store);
 
 /*
   Enable Hot Reloading for the reducers

@@ -7,7 +7,6 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute } from 'react-router'
 import { createHistory } from 'history'
 import { browserHistory } from 'react-router'
-import { syncReduxAndRouter } from 'redux-simple-router'
 
 /*
   Import Components  
@@ -25,8 +24,8 @@ import store from './store';
 /*
   Handle Redux + React Router History
 */
-const history = createHistory();
-syncReduxAndRouter(history, store)
+// 2.0 const history = createHistory();
+// 2.0 syncReduxAndRouter(history, store)
 
 /*
   Rendering
