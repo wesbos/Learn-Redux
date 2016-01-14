@@ -4,9 +4,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute } from 'react-router'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { createHistory } from 'history'
-import { browserHistory } from 'react-router'
 
 /*
   Import Components  
@@ -20,12 +19,6 @@ import css from  './styles/style.styl';
 
 /* Import our data store */
 import store from './store';
-
-/*
-  Handle Redux + React Router History
-*/
-// 2.0 const history = createHistory();
-// 2.0 syncReduxAndRouter(history, store)
 
 /*
   Rendering

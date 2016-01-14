@@ -1,11 +1,7 @@
 import { compose, createStore, combineReducers, applyMiddleware } from 'redux';
 import { syncHistory } from 'redux-simple-router'; 
-
-// Import some dummy data - this could come from an API
 import rootReducer from './reducers/index';
-
 import { createHistory } from 'history'
-
 
 /*
   Store
@@ -16,8 +12,8 @@ import { createHistory } from 'history'
 */
 
 const defaultState = {
-  posts : [],
-  comments : {}
+  posts: [],
+  comments: {}
 };
 
 /*
@@ -39,7 +35,7 @@ const store = createStoreWithMiddleware(rootReducer, defaultState);
   Sync History to Store
 */
 
-reduxRouterMiddleware.syncHistoryToStore(store);
+export const unsubscribe = reduxRouterMiddleware.listenForReplays(store);
 
 /*
   Enable Hot Reloading for the reducers

@@ -42,7 +42,7 @@
     "react-transform-hmr": "^1.0.1",
     "redbox-react": "^1.0.1",
     "redux": "^3.0.4",
-    "redux-simple-router": "^2.0.1",
+    "redux-simple-router": "^2.0.2",
     "rimraf": "^2.4.3",
     "style-loader": "^0.13.0",
     "stylus-loader": "^1.4.2",
@@ -51,6 +51,7 @@
     "webpack-hot-middleware": "^2.6.0"
   },
   "devDependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.3.13",
     "expect": "^1.13.4"
   }
 }

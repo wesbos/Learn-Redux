@@ -1,6 +1,7 @@
 import { cloneDeep } from 'lodash';
 
 function posts(state = [], action) {
+  console.log('Posts reducer called');
   switch (action.type) {
     case 'LOAD' :
       return [...action.posts];
