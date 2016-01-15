@@ -1,5 +1,6 @@
 import { compose, createStore, combineReducers, applyMiddleware } from 'redux';
 import { syncHistory } from 'redux-simple-router'; 
+import { browserHistory } from 'react-router'
 import rootReducer from './reducers/index';
 import { createHistory } from 'history'
 
@@ -26,7 +27,7 @@ const defaultState = {
 */
 
 const history = createHistory();
-const reduxRouterMiddleware = syncHistory(history);
+const reduxRouterMiddleware = syncHistory(browserHistory);
 const createStoreWithDevTools = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore);
 const createStoreWithMiddleware = applyMiddleware(reduxRouterMiddleware)(createStoreWithDevTools);
 const store = createStoreWithMiddleware(rootReducer, defaultState);

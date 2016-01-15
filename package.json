@@ -30,7 +30,6 @@
     "eslint-plugin-babel": "^3.0.0",
     "eslint-plugin-react": "^3.11.3",
     "express": "^4.13.3",
-    "history": "1.13.1",
     "jsonp": "^0.2.0",
     "lodash": "^3.10.1",
     "raven-js": "^2.0.1",
@@ -49,10 +48,7 @@
     "stylus-loader": "^1.4.2",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
-    "webpack-hot-middleware": "^2.6.0"
-  },
-  "devDependencies": {
-    "babel-plugin-transform-object-rest-spread": "^6.3.13",
-    "expect": "^1.13.4"
+    "webpack-hot-middleware": "^2.6.0",
+    "babel-plugin-transform-object-rest-spread": "^6.3.13"
   }
 }

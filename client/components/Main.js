@@ -29,7 +29,12 @@ const Main = React.createClass({
         { React.cloneElement(this.props.children, this.props) }
       </div>
     );
-  }
+  },
+
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
+  
 });
 
 export default Main;
