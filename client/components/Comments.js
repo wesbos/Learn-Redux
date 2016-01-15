@@ -19,12 +19,7 @@ const Comments = React.createClass({
   },
   render() {
 
-    const comments = this.props.comments[this.props.params.postId] || [];
-
-    if(!this.props.commentsLoaded) {
-      return (<div>Loading Comments...</div>)
-    }
-    
+    const comments = this.props.comments[this.props.params.postId] || [];    
     return (
       <div className="comments">
         

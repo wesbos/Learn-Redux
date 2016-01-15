@@ -19,26 +19,9 @@ export function increment(i) {
   };
 }
 
-
-export function load(posts) {
-  return {
-    type : 'LOAD',
-    posts
-  }
-}
-
 /*
   Comments
 */
-
-export function loadComments(comments, postId) {
-  return {
-    type : 'LOAD_COMMENTS',
-    comments,
-    postId
-  };
-}
-
 
 export function addComment(postId, author, comment) {
   return {

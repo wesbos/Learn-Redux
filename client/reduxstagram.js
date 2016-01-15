@@ -6,6 +6,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { createHistory } from 'history'
+import 'babel-polyfill';
 
 /*
   Import Components  

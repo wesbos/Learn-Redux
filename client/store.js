@@ -3,7 +3,8 @@ import { syncHistory } from 'redux-simple-router';
 import { browserHistory } from 'react-router'
 import rootReducer from './reducers/index';
 import { createHistory } from 'history'
-
+import comments from './data/comments';
+import posts from './data/posts';
 /*
   Store
 
@@ -12,9 +13,10 @@ import { createHistory } from 'history'
   2. An optional starting state - similar to React's getInitialState
 */
 
+
 const defaultState = {
-  posts: [],
-  comments: {}
+  posts,
+  comments
 };
 
 /*
