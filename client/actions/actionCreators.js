@@ -19,19 +19,6 @@ export function increment(i) {
   };
 }
 
-export function decrement() {
-  return {
-    type: 'DECREMENT_COUNTER'
-  };
-}
-
-
-export function addItem(text) {
-  return {
-    type : 'ADD_ITEM',
-    text
-  };
-}
 
 export function load(posts) {
   return {

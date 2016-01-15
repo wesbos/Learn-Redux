@@ -1,11 +1,11 @@
-const base = 'https://api.instagram.com/v1';
+const base = 'https://crossorigin.me/https://www.instagram.com';
 import { instagramToken } from './config';
 
-export function commentEndpoint(id) {
-  return `${base}/media/${id}/comments?access_token=${instagramToken}`;
+export function commentEndpoint(code) {
+  return `${base}/p/${code}/?__a=1`;
 }
 
-export function mediaEndpoint(userId = 519208) {
-  return `${base}/users/${userId}/media/recent?access_token=${instagramToken}`;
+export function mediaEndpoint(user = 'wesbos') {
+  return `${base}/${user}/?__a=1`;
 }
 

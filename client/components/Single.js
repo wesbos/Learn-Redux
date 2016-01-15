@@ -2,7 +2,7 @@ import React from 'react';
 import Photo from './Photo';
 import Comments from './Comments';
 import { findWhere, findIndex } from 'lodash';
-import jsonp from 'jsonp';
+import axios from 'axios';
 import { commentEndpoint } from '../data/endpoints';
 
 const Single = React.createClass({
@@ -28,22 +28,20 @@ const Single = React.createClass({
 
   fetchComments(postId) {
     // find the post that we want 
-    jsonp(commentEndpoint(postId),null,(err, response) => {
-      if(err) {
-        console.error(err);
-        return;
-      }
-      console.log('Got the comments:', response);
-      // load them into our redux state
-      this.props.loadComments(response.data, postId);
-      
-      // mark this component's state as loaded comments
-      this.setState({ commentsLoaded: true })
-    });
+    axios.get(commentEndpoint(postId))
+      .then((response)=> {
+        console.log('Got the comments:', response.data.media.comments.nodes);
+        // load them into our redux state
+        this.props.loadComments(response.data.media.comments.nodes, postId);
+        // mark this component's state as loaded comments
+        this.setState({ commentsLoaded: true })
+    })
+    .catch((err)=>console.error(err))
+  
   },
   
   render() {
-    const i = findIndex(this.props.posts,(post)=> post.id === this.props.params.postId);
+    const i = findIndex(this.props.posts,(post)=> post.code === this.props.params.postId);
     
     // Then we go ahead and return some JSX
     if(i < 0) {

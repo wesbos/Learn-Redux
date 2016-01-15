@@ -16,7 +16,7 @@ function comments(state = {}, action) {
       var commentState = cloneDeep(state);
       // push the comment into the new state
       commentState[action.postId].push({
-        from : { full_name : action.author },
+        user : { username : action.author },
         text : action.comment
       });
       // return our new state

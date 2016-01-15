@@ -1,12 +1,13 @@
 import React from 'react';
 
 const Comments = React.createClass({
-  renderComment(data, i) {
+  renderComment(comment, i) {
+    console.log(comment);
     return (
       <div className="comment" key={i}>
         <p>
-          <strong>{data.from.full_name}</strong>
-          {data.text}
+          <strong>{comment.user.username}</strong>
+          {comment.text}
           <button className="remove-comment" onClick={this.props.removeComment.bind(null,this.props.params.postId, i)}>&times;</button>
         </p>
       </div>

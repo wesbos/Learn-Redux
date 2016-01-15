@@ -1,7 +1,7 @@
 import React from 'react';
 import PhotoGrid from './PhotoGrid';
 import { mediaEndpoint } from '../data/endpoints';
-import jsonp from 'jsonp';
+import axios from 'axios';
 import { Link } from 'react-router';
 
 const Main = React.createClass({
@@ -9,16 +9,12 @@ const Main = React.createClass({
   displayName : 'Main',
 
   componentWillMount() {
-    console.log('Mounted...');
-    jsonp(mediaEndpoint(),null, (err,response)=> {
-      if(err) {
-        console.error(err);
-        return;
-      }
-      console.log(response);
-      console.log('About to call load again');
-      this.props.load(response.data);
-    });
+
+    axios.get(mediaEndpoint())
+      .then((response)=> {
+        this.props.load(response.data.user.media.nodes);
+      })
+      .catch((err)=>console.error(err));
     
   },
 
