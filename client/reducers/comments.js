@@ -4,7 +4,7 @@ function postComments(state = [], action) {
       return action.comments;
     case 'ADD_COMMENT':
       return [...state, {
-        user : { username: action.author },
+        user : action.author,
         text : action.comment      
       }];
     case 'REMOVE_COMMENT':
