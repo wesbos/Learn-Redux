@@ -21,6 +21,15 @@ import css from  './styles/style.styl';
 import store from './store';
 
 /*
+  Error Logging
+*/
+
+import Raven from 'raven-js';
+import { sentry_url } from './data/config';
+Raven.config(sentry_url).install();
+
+
+/*
   Rendering
   This is where we hook up the Store with our actual component and the router
 */
@@ -36,10 +45,3 @@ render(
   document.getElementById('root')
 );
 
-/*
-  Error Logging
-*/
-import Raven from 'raven-js';
-import { SENTRY_URL } from './data/config';
-// Raven.config(SENTRY_URL).install();
-Raven.config('https://cb55d4f05cd443ce82303222f77ef5e0@app.getsentry.com/61499').install()
