@@ -24,7 +24,7 @@ const Photo = React.createClass({
         </div>
 
         <figcaption>
-          <p>{post.caption.text}</p>
+          <p>{post.caption}</p>
 
           <div className="control-buttons">
             <button onClick={this.props.increment.bind(null,i)} className="likes">&hearts; {post.likes.count}</button>
@@ -40,27 +40,6 @@ const Photo = React.createClass({
 
       </figure>
     )
-    return (
-      <figure key={i} className="grid-figure">
-
-        <div className="grid-photo-wrap">
-          <Link to={`/view/${post.id}`}>
-            <img className="grid-photo" src={post.src} alt={post.caption} onDoubleClick={(e) => this.handleDoubleClick(e,i)}/>
-          </Link>
-
-          <CSSTransitionGroup transitionName="like" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
-            <span key={post.likes} className="likes-heart">{post.likes}</span>
-          </CSSTransitionGroup>
-
-        </div>
-
-        <figcaption>
-          <p>{post.caption.text}</p>
-          <button onClick={this.props.increment.bind(null,i)} className="likes">&hearts;{post.likes}</button>
-          <span className="comment-count">&#x1f4ac;💬</span>
-        </figcaption>
-      </figure>
-    );
   }
 });
 
