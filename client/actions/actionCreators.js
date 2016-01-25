@@ -15,7 +15,7 @@
 export function increment(i) {
   return {
     type: 'INCREMENT_LIKES',
-    index : i
+    index: i
   };
 }
 
@@ -25,7 +25,7 @@ export function increment(i) {
 
 export function addComment(postId, author, comment) {
   return {
-    type : 'ADD_COMMENT',
+    type: 'ADD_COMMENT',
     postId,
     author, // same as author: author
     comment // same as comment: comment
@@ -34,7 +34,7 @@ export function addComment(postId, author, comment) {
 
 export function removeComment(postId, i){
   return {
-    type : 'REMOVE_COMMENT',
+    type: 'REMOVE_COMMENT',
     postId,
     i
   };

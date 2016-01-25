@@ -1,7 +1,5 @@
 function postComments(state = [], action) {
   switch(action.type) {
-    case 'LOAD_COMMENTS' :
-      return action.comments;
     case 'ADD_COMMENT':
       return [...state, {
         user : action.author,

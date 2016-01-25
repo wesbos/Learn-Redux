@@ -1,12 +1,5 @@
 const posts = [
    {
-      "code":"BAhvZrRwcfu",
-      "caption":"Tried poke for the first time at @pokehbar. Delicious! It's like a bowl of sushi",
-      "likes":30,
-      "id":"1162418651480049646",
-      "display_src":"https://scontent.cdninstagram.com/hphotos-xpa1/t51.2885-15/e35/12501993_1504179163220771_2060674913_n.jpg"
-   },
-   {
       "code":"BAcyDyQwcXX",
       "caption":"Lunch #hamont",
       "likes":56,
@@ -21,6 +14,13 @@ const posts = [
       "display_src":"https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/e35/12407344_1283694208323785_735653395_n.jpg"
    },
    {
+      "code":"BAF_KY4wcRY",
+      "caption":"Cleaned my office and mounted my recording gear overhead. Stoked for 2016!",
+      "likes":79,
+      "id":"1154606670337393752",
+      "display_src":"https://scontent.cdninstagram.com/hphotos-xpf1/t51.2885-15/e35/923995_1704188643150533_1383710275_n.jpg"
+   },
+   {
       "code":"BAPIPRjQce9",
       "caption":"Making baby pancakes for one early rising baby. ☕️🍴",
       "likes":47,
@@ -28,11 +28,25 @@ const posts = [
       "display_src":"https://scontent.cdninstagram.com/hphotos-xap1/t51.2885-15/e35/12407480_1654828594805097_152207166_n.jpg"
    },
    {
-      "code":"BAF_KY4wcRY",
-      "caption":"Cleaned my office and mounted my recording gear overhead. Stoked for 2016!",
-      "likes":79,
-      "id":"1154606670337393752",
-      "display_src":"https://scontent.cdninstagram.com/hphotos-xpf1/t51.2885-15/e35/923995_1704188643150533_1383710275_n.jpg"
+      "code":"-hZh6IQcfN",
+      "caption":"New Stickers just came in. I'll do another mailing in a few weeks if you want some. #javascript",
+      "likes":66,
+      "id":"1126293663140399053",
+      "display_src":"https://scontent.cdninstagram.com/hphotos-xap1/t51.2885-15/e35/11875511_1562439187344831_813588280_n.jpg"
+   },
+   {
+      "code":"-B3eiIwcYV",
+      "caption":"Tacos for breakfast. I love you Austin. 🇺🇸",
+      "likes":33,
+      "id":"1117418173361145365",
+      "display_src":"https://scontent.cdninstagram.com/hphotos-xfa1/t51.2885-15/e35/11917950_927755223968499_1198055371_n.jpg"
+   },
+   {
+      "code":"BAhvZrRwcfu",
+      "caption":"Tried poke for the first time at @pokehbar. Delicious! It's like a bowl of sushi",
+      "likes":30,
+      "id":"1162418651480049646",
+      "display_src":"https://scontent.cdninstagram.com/hphotos-xpa1/t51.2885-15/e35/12501993_1504179163220771_2060674913_n.jpg"
    },
    {
       "code":"BAAJqbOQcW5",
@@ -133,13 +147,6 @@ const posts = [
       "display_src":"https://scontent.cdninstagram.com/hphotos-xtp1/t51.2885-15/e35/12256736_1758525004381641_1136705181_n.jpg"
    },
    {
-      "code":"-hZh6IQcfN",
-      "caption":"New Stickers just came in. I'll do another mailing in a few weeks if you want some. #javascript",
-      "likes":66,
-      "id":"1126293663140399053",
-      "display_src":"https://scontent.cdninstagram.com/hphotos-xap1/t51.2885-15/e35/11875511_1562439187344831_813588280_n.jpg"
-   },
-   {
       "code":"-fasqlQceO",
       "caption":"Kaitlin decorated the house for the Christmas. So gezellig! #casabos",
       "likes":46,
@@ -159,13 +166,6 @@ const posts = [
       "likes":82,
       "id":"1118481761857291950",
       "display_src":"https://scontent.cdninstagram.com/hphotos-xpt1/t51.2885-15/e35/11326072_550275398458202_1726754023_n.jpg"
-   },
-   {
-      "code":"-B3eiIwcYV",
-      "caption":"Tacos for breakfast. I love you Austin. 🇺🇸",
-      "likes":33,
-      "id":"1117418173361145365",
-      "display_src":"https://scontent.cdninstagram.com/hphotos-xfa1/t51.2885-15/e35/11917950_927755223968499_1198055371_n.jpg"
    }
 ];
 

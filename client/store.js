@@ -1,8 +1,7 @@
-import { compose, createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { syncHistory } from 'redux-simple-router'; 
 import { browserHistory } from 'react-router'
 import rootReducer from './reducers/index';
-import { createHistory } from 'history'
 import comments from './data/comments';
 import posts from './data/posts';
 /*
@@ -28,7 +27,6 @@ const defaultState = {
   But we are using the redux dev tools chrome extension and the redux-simple-router so it requires a little more setup. 
 */
 
-const history = createHistory();
 const reduxRouterMiddleware = syncHistory(browserHistory);
 const createStoreWithDevTools = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore);
 const createStoreWithMiddleware = applyMiddleware(reduxRouterMiddleware)(createStoreWithDevTools);

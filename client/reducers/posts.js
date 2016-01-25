@@ -3,7 +3,7 @@ function posts(state = [], action) {
     case 'LOAD' :
       return [...action.posts];
     case 'INCREMENT_LIKES' :
-      var i = action.index;
+      const i = action.index;
       return [
         ...state.slice(0, i),
         {...state[i],  likes: state[i].likes + 1 },
