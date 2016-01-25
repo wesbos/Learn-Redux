@@ -5,7 +5,7 @@
   "scripts": {
     "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "build": "npm run clean && npm run build:webpack",
-    "test": "mocha './src/**/*.spec.js' --compilers js:babel-core/register",
+    "test": "mocha './tests/**/*.spec.js' --compilers js:babel-core/register",
     "clean": "rimraf dist",
     "start": "node devServer.js"
   },
@@ -17,7 +17,6 @@
   "license": "MIT",
   "homepage": "https://github.com/wesbos/Learn-Redux",
   "dependencies": {
-    "axios": "^0.8.1",
     "babel-core": "^6.3.15",
     "babel-eslint": "^5.0.0-beta4",
     "babel-loader": "^6.2.0",
@@ -49,5 +48,11 @@
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.6.0"
+  },
+  "devDependencies": {
+    "expect": "^1.13.4",
+    "expect-jsx": "^2.2.2",
+    "mocha": "^2.3.4",
+    "react-addons-test-utils": "^0.14.6"
   }
 }

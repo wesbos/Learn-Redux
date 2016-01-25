@@ -13,7 +13,6 @@ import { combineReducers } from 'redux';
 import { routeReducer } from 'redux-simple-router'; // we need this for react-router 
 import posts from './posts';
 import comments from './comments';
-import location from './location';
 
 // Combine all our reducers togeher 
 const rootReducer = combineReducers({ posts, comments, routing: routeReducer });

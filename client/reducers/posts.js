@@ -1,7 +1,5 @@
 function posts(state = [], action) {
   switch (action.type) {
-    case 'LOAD' :
-      return [...action.posts];
     case 'INCREMENT_LIKES' :
       const i = action.index;
       return [
