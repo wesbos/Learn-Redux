@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import { syncHistory } from 'redux-simple-router'; 
+import { syncHistory } from 'react-router-redux'; 
 import { browserHistory } from 'react-router'
 import rootReducer from './reducers/index';
 import comments from './data/comments';

@@ -10,7 +10,7 @@ import { combineReducers } from 'redux';
   
 */
 
-import { routeReducer } from 'redux-simple-router'; // we need this for react-router 
+import { routeReducer } from 'react-router-redux'; // we need this for react-router 
 import posts from './posts';
 import comments from './comments';
 
