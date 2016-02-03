@@ -42,7 +42,7 @@ function mapStateToProps(state) {
   and make the actions available via props
 */
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
   return bindActionCreators(actionCreators, dispatch);
 }
 
