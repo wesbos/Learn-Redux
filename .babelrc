@@ -16,6 +16,20 @@
           }]
         }]
       ]
+    },
+    "production": {
+      "plugins": [
+        ["transform-object-rest-spread"],
+        ["transform-react-display-name"],
+        ["react-transform", {
+          "transforms": [{
+            "imports": ["react"]
+          }, {
+            "transform": "react-transform-catch-errors",
+            "imports": ["react", "redbox-react"]
+          }]
+        }]
+      ]
     }
   }
 }
