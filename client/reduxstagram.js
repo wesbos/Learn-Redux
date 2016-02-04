@@ -24,9 +24,11 @@ import store from './store';
   Error Logging
 */
 
-import Raven from 'raven-js';
-import { sentry_url } from './data/config';
-Raven.config(sentry_url).install();
+// import Raven from 'raven-js';
+// import { sentry_url } from './data/config';
+// if(window) {
+//   Raven.config(sentry_url).install();
+// }
 
 
 /*

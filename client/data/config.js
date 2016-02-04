@@ -9,5 +9,5 @@ export function logException(ex, context) {
     extra: context
   });
   /*eslint no-console:0*/
-  window.console && console.error && console.error(ex);
+  window && window.console && console.error && console.error(ex);
 }

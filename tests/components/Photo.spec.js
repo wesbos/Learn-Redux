@@ -27,6 +27,12 @@ describe('Photo Component', function () {
   it('should return a figure element',()=>{
     expect(result.type).toEqual('figure');
   });
+
+  it('should have two children',()=>{
+    expect(result.props.children.length).toEqual(2);
+  });
+
+
 })
 
 
