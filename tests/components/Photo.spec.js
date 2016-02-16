@@ -4,18 +4,21 @@ import expect from 'expect';
 import expectJSX from 'expect-jsx';
 expect.extend(expectJSX);
 import Photo from '../../client/components/Photo';
+
+// grab some data to use
 import comments from '../../client/data/comments';
 import posts from '../../client/data/posts';
 
 
 describe('Photo Component', function () {
   var result;
+  
   before(()=> {
     var renderer = ReactTestUtils.createRenderer();
     
-    let props = {
+    const props = {
       post : posts[0],
-      comments : comments.BAcyDyQwcXX,
+      comments : comments[posts[0].code],
       i : 0,
       increment: expect.createSpy()
     };
@@ -32,8 +35,4 @@ describe('Photo Component', function () {
     expect(result.props.children.length).toEqual(2);
   });
 
-
 })
-
-
-

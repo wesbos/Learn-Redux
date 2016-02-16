@@ -27,7 +27,6 @@ describe('Single Component', function () {
 
     renderer.render(<Single {...props} />)
     result = renderer.getRenderOutput();
-    console.log(result);
   });
 
   it('should render properly',()=>{
