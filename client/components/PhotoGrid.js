@@ -2,9 +2,7 @@ import React from 'react';
 import Photo from './Photo';
 
 const PhotoGrid = React.createClass({
-  
-  displayName : 'PhotoGrid',
-  
+
   handleSubmit(e) {
     e.preventDefault();
     this.props.addItem(this.refs.item.value);

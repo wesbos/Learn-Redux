@@ -3,8 +3,6 @@ import { Link } from 'react-router';
 
 const Main = React.createClass({
 
-  displayName : 'Main',
-
   render() {
     // Then we go ahead and return some JSX
     return (
@@ -17,7 +15,7 @@ const Main = React.createClass({
       </div>
     );
   }
-  
+
 });
 
 export default Main;
