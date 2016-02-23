@@ -1,9 +1,10 @@
-import { createStore, applyMiddleware } from 'redux';
-import { syncHistory } from 'react-router-redux'; 
+import { createStore, applyMiddleware, compose } from 'redux';
+import { syncHistoryWithStore } from 'react-router-redux';
 import { browserHistory } from 'react-router'
 import rootReducer from './reducers/index';
 import comments from './data/comments';
 import posts from './data/posts';
+
 /*
   Store
 
@@ -12,31 +13,19 @@ import posts from './data/posts';
   2. An optional starting state - similar to React's getInitialState
 */
 
-
 const defaultState = {
   posts,
   comments
 };
 
-/*
-  Create our store which will hold all of our data.
-  Normally this would look like this:
+const enhancers = compose(
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+);
 
-    const store = createStore(rootReducer, defaultState);
+const store = createStore(rootReducer, defaultState, enhancers);
 
-  But we are using the redux dev tools chrome extension and the redux-simple-router so it requires a little more setup. 
-*/
-
-const reduxRouterMiddleware = syncHistory(browserHistory);
-const createStoreWithDevTools = (window.devToolsExtension ? window.devToolsExtension()(createStore) : createStore);
-const createStoreWithMiddleware = applyMiddleware(reduxRouterMiddleware)(createStoreWithDevTools);
-const store = createStoreWithMiddleware(rootReducer, defaultState);
-
-/*
-  Sync History to Store
-*/
-
-export const unsubscribe = reduxRouterMiddleware.listenForReplays(store);
+// we export history because we need it in `reduxstagram.js` to feed into <Router>
+export const history = syncHistoryWithStore(browserHistory, store);
 
 /*
   Enable Hot Reloading for the reducers
