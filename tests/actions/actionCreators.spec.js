@@ -2,7 +2,7 @@ import expect from 'expect';
 import { increment, addComment, removeComment } from '../../client/actions/actionCreators.js';
 
 describe('Action Creators', () => {
-  
+
   describe('increment',()=> {
 
     it('should create an action to increment likes', () => {
@@ -41,10 +41,11 @@ describe('Action Creators', () => {
     it('should create an action to remove a comment', () => {
       const expected = {
         type: 'REMOVE_COMMENT',
+        postId: 'BAcyDyQwcXX',
         i: 3
       };
 
-      const actual = removeComment(3);
+      const actual = removeComment('BAcyDyQwcXX', 3);
       expect(actual).toEqual(expected);
     });
 
