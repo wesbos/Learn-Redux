@@ -19,10 +19,10 @@ const Comments = React.createClass({
   },
   render() {
 
-    const comments = this.props.comments[this.props.params.postId] || [];    
+    const comments = this.props.comments[this.props.params.postId] || [];
     return (
       <div className="comments">
-        
+
         {comments.map(this.renderComment)}
 
         <form onSubmit={this.handleSubmit} ref="commentForm" className="comment-form">

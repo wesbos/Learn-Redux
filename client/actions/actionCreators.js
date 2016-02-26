@@ -1,8 +1,8 @@
 /**
   Action Creators
-  
+
   These fire events which the reducer will handle
-  We will later call these functions from inside our component 
+  We will later call these functions from inside our component
 
   Later these functions get bound to 'dispatch' fires the actual event
   Right now they just return an object
@@ -32,9 +32,10 @@ export function addComment(postId, author, comment) {
   };
 }
 
-export function removeComment(i){
+export function removeComment(postId, i){
   return {
     type: 'REMOVE_COMMENT',
-    i
+    i,
+    postId
   };
 }
