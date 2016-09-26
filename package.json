@@ -54,5 +54,59 @@
     "expect-jsx": "^2.3.0",
     "mocha": "^2.4.5",
     "react-addons-test-utils": "^0.14.7"
+  },
+  "babel": {
+    "presets": ["react", "es2015"],
+    "env": {
+      "development": {
+        "plugins": [
+          ["transform-object-rest-spread"],
+          ["transform-react-display-name"],
+          ["react-transform", {
+            "transforms": [{
+              "transform": "react-transform-hmr",
+              "imports": ["react"],
+              "locals": ["module"]
+            }, {
+              "transform": "react-transform-catch-errors",
+              "imports": ["react", "redbox-react"]
+            }]
+          }]
+        ]
+      },
+      "production": {
+        "plugins": [
+          ["transform-object-rest-spread"],
+          ["transform-react-display-name"]
+        ]
+      }
+    }
+  },
+  "eslintConfig": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    },
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parser": "babel-eslint",
+    "rules": {
+      "quotes": [2, "single"],
+      "strict": [2, "never"],
+      "babel/generator-star-spacing": 1,
+      "babel/new-cap": 1,
+      "babel/object-shorthand": 1,
+      "babel/arrow-parens": 1,
+      "babel/no-await-in-loop": 1,
+      "react/jsx-uses-react": 2,
+      "react/jsx-uses-vars": 2,
+      "react/react-in-jsx-scope": 2
+    },
+    "plugins": [
+      "babel",
+      "react"
+    ]
   }
 }
