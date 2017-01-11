@@ -26,7 +26,7 @@ import Main from './Main';
 
 
 /*
-  Here we specify which state needs to be made avaialble to the component
+  Here we specify which state needs to be made available to the component
   our state.posts and state.comments will be available via this.props.posts and this.props.comments
 */
 
